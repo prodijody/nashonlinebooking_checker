@@ -97,10 +97,14 @@ def run(playwright: Playwright) -> None:
 
 
 with sync_playwright() as playwright:
+    count = 0
     while True:
         try:
+            count += 1
             run(playwright)
             break
         except Exception as e:
             print(f"Error - {e}")
             time.sleep(5)
+        if count > 10:
+            break
